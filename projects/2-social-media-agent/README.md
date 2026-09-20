@@ -1,86 +1,49 @@
-# Project 2: Social Media AI Agent with Approval
+# Human-in-the-Loop Content Agent
 
-## What is This?
-An AI assistant that helps you create social media posts, but requires your approval before posting anything. This teaches you about AI-human collaboration and safety controls.
+An AI-assisted content-generation workflow that keeps a human approval gate between model output and downstream action.
 
-## What You'll Learn
-- Using AI to generate creative content
-- Implementing approval workflows
-- AI content moderation
-- Ethical AI usage
+## Workflow
 
-## Prerequisites
-- Python 3.8 or higher
-- Basic Python knowledge
-- OpenAI API key (get one at https://platform.openai.com)
-- Optional: Twitter/X API credentials (for actual posting)
+```text
+Topic / Brief → AI Generation → Review → Approve / Reject → Save Approved Content
+```
 
-## Step-by-Step Guide
+## Key Capabilities
 
-### Step 1: Install Dependencies
+- Generates content from a user-provided topic or brief
+- Supports multiple content styles
+- Presents generated output for review
+- Requires explicit approval before saving content
+- Maintains an audit trail of approved content
+
+## Tech Stack
+
+Python · OpenAI API · python-dotenv
+
+## Run Locally
+
 ```bash
 pip install -r requirements.txt
-```
-
-### Step 2: Set Up Your API Key
-Create a `.env` file in this directory:
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-### Step 3: Run the Agent
-```bash
 python social_agent.py
 ```
 
-### Step 4: Generate Posts
-- Enter a topic or idea
-- AI will generate a post
-- Review and approve/reject
-- Optionally save to file
+Provide `OPENAI_API_KEY` through a local `.env` file or another secure runtime secret mechanism.
 
-## How It Works
-1. **User Input**: You provide a topic or idea
-2. **AI Generation**: Creates a social media post
-3. **Preview**: Shows you the generated content
-4. **Approval**: You decide to approve or reject
-5. **Action**: Saves approved posts or discards rejected ones
+## Engineering Focus
 
-## Files
-- `social_agent.py`: Main application code
-- `requirements.txt`: Python dependencies
-- `approved_posts.txt`: Saved approved posts
-- `.env`: Your API key (create this yourself)
+The project explores an important agentic-AI design pattern: **human-in-the-loop control**. Instead of allowing generated content to trigger an external action automatically, the workflow inserts a review checkpoint.
 
-## Features
-- Multiple post styles (casual, professional, funny, informative)
-- Character count limits
-- Hashtag suggestions
-- Emoji support
-- Approval workflow
+This pattern is useful for systems where quality, policy, brand, or operational controls require human authorization.
 
-## Safety Features
-- **Human-in-the-loop**: Nothing posts without approval
-- **Content review**: You see everything before it's saved
-- **Edit capability**: Modify AI suggestions
-- **Audit trail**: All approved posts are logged
+## Roadmap
 
-## Tips for Beginners
-- Start with simple topics
-- Try different post styles
-- Review all AI-generated content carefully
-- Use this to learn what makes good content
-- Never bypass the approval step
+- Structured moderation checks
+- Configurable approval policies
+- Scheduling and external API integrations
+- Evaluation and audit metrics
+- Automated tests
+- Persistent workflow state
 
-## Ethical Considerations
-- Always review AI-generated content
-- Don't use AI to spread misinformation
-- Be transparent that content is AI-assisted
-- Take responsibility for what you post
-- Respect platform guidelines
+## Responsible Use
 
-## Next Steps
-- Integrate with actual social media APIs
-- Add scheduling features
-- Create A/B testing capabilities
-- Implement analytics
+Generated content should be reviewed before publication. External publishing integrations should use scoped credentials and explicit authorization.

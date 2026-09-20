@@ -1,125 +1,49 @@
-# Project 4: AI with Memory
+# Conversational AI with Persistent Memory
 
-## What is This?
-A conversational AI that remembers your previous interactions. Learn how to build AI assistants that maintain context and provide personalized experiences across sessions.
+A conversational AI prototype that maintains context across interactions and persists conversation history between sessions.
 
-## What You'll Learn
-- Implementing conversation memory
-- Storing and retrieving context
-- Building personalized AI experiences
-- Managing conversation history
+## Architecture
 
-## Prerequisites
-- Python 3.8 or higher
-- Basic Python knowledge
-- OpenAI API key (get one at https://platform.openai.com)
+```text
+User Message → Load Conversation State → Build Context → OpenAI Model → Response → Persist Updated State
+```
 
-## Step-by-Step Guide
+## Key Capabilities
 
-### Step 1: Install Dependencies
+- Maintains short-term conversational context
+- Persists history across application sessions
+- Uses prior context when generating responses
+- Supports inspecting and clearing stored memory
+- Demonstrates stateful AI application design
+
+## Tech Stack
+
+Python · OpenAI API · JSON persistence · python-dotenv
+
+## Run Locally
+
 ```bash
 pip install -r requirements.txt
-```
-
-### Step 2: Set Up Your API Key
-Create a `.env` file in this directory:
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-### Step 3: Run the Assistant
-```bash
 python memory_ai.py
 ```
 
-### Step 4: Have a Conversation
-- Talk to the AI naturally
-- It remembers what you discussed
-- Reference earlier topics
-- Build on previous conversations
+Configure `OPENAI_API_KEY` through a secure runtime environment.
 
-## How It Works
-1. **User Message**: You send a message
-2. **Load History**: Retrieves previous conversation
-3. **AI Response**: Generates response with context
-4. **Save History**: Stores the new exchange
-5. **Persistence**: Memory saved across sessions
+## Engineering Focus
 
-## Files
-- `memory_ai.py`: Main application code
-- `requirements.txt`: Python dependencies
-- `conversation_history.json`: Stored conversations
-- `.env`: Your API key (create this yourself)
+Stateless model APIs do not automatically provide application-level memory. This project demonstrates how an application can explicitly manage state, reconstruct relevant context, and persist conversations.
 
-## Features
-- **Short-term Memory**: Remembers current conversation
-- **Long-term Memory**: Saves across sessions
-- **Context Awareness**: References previous topics
-- **Personalization**: Learns about you over time
-- **Clear Memory**: Option to start fresh
+For production systems, the same pattern can be extended with database-backed memory, semantic retrieval, summarization, retention policies, encryption, and user-level isolation.
 
-## Memory Types
+## Roadmap
 
-### Short-term Memory
-- Current conversation only
-- Temporary context
-- Cleared when you quit
+- Replace flat-file persistence with a database
+- Add semantic memory retrieval
+- Add conversation summarization
+- Add user/session isolation
+- Add configurable retention controls
+- Add automated tests
 
-### Long-term Memory
-- Saved to file
-- Persists across sessions
-- Can be cleared manually
+## Privacy
 
-## Commands
-- Regular messages: Just chat normally
-- `clear memory`: Delete conversation history
-- `show memory`: Display current history
-- `quit`: Exit the program
-
-## Tips for Beginners
-- Try referencing earlier topics
-- Test memory across different sessions
-- Notice how context improves responses
-- Experiment with clearing memory
-- Ask follow-up questions
-
-## Example Conversations
-```
-You: My name is Alex and I love Python
-AI: Nice to meet you, Alex! Python is a great language...
-
-[Later in conversation]
-You: What's my favorite programming language?
-AI: You mentioned you love Python!
-```
-
-## Privacy & Data
-- Conversations stored locally only
-- No data sent elsewhere (except OpenAI API)
-- You control your data
-- Can delete anytime
-
-## How Memory Improves AI
-- **Context**: AI understands what you're talking about
-- **Personalization**: Tailored responses
-- **Efficiency**: No need to repeat information
-- **Natural Flow**: More human-like conversation
-
-## Common Use Cases
-- Personal assistant
-- Learning companion
-- Project discussion partner
-- Brainstorming buddy
-
-## Important Notes
-- Memory uses local storage
-- API calls cost money (minimal)
-- Long conversations use more tokens
-- Clear memory periodically for best results
-
-## Next Steps
-- Add user profiles
-- Implement smart summarization
-- Create topic-based memories
-- Add memory search
-- Build memory analytics
+Conversation history is stored by the application. Real deployments should define retention, access, encryption, and deletion policies appropriate to the data being processed.
